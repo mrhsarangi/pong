@@ -12,18 +12,26 @@ class Paddle(Turtle):
         self.shapesize(7., 1., 1.)
         self.pos = pos   
         self.limit = limit
-
+        self.yvel =0
 
     def moveup(self):
-        # self.dy = min(self.dy + 15, 20)
-        pass
+        """
+            When up arrow is pressed inc upward vel
+            until a max limit
+        """
+        self.yvel = min(self.yvel + 15, 45)
         
     def movedown(self):
-        # self.dy = max(self.dy - 15, -20)
-        pass
+        self.yvel = max(self.yvel - 15, -45)
 
     def update(self):    
-        y = self.ycor() + self.dy 
+        y = self.ycor() + self.yvel 
+
+        if self.yvel > 0:
+            self.yvel -= 5
+        elif self.yvel < 0:
+            self.yvel += 5
+
         y = min(self.limit, y)
         y = max(-self.limit, y)        
         self.goto(self.pos, y)
